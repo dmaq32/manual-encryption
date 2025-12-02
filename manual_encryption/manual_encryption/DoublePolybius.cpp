@@ -93,14 +93,14 @@ string DoublePolybius::decrypt(string cipher,double *t) {
 }
 
 void DoublePolybius::demonstrateProcess(string text) {
-    cout << "�������� �����: " << text << endl;
+    cout << "Исходный текст: " << text << endl;
 
     vector<int> verticalCoords, horizontalCoords;
-    cout << "�����: ";
+    cout << "Буквы: ";
     for (char c : text) if (c != ' ') cout << c << " ";
     cout << endl;
 
-    cout << "������������ ����������:   ";
+    cout << "Вертикальные координаты:   ";
     for (char c : text) {
         if (c != ' ') {
             auto coords = findCoordinates(c);
@@ -110,7 +110,7 @@ void DoublePolybius::demonstrateProcess(string text) {
     }
     cout << endl;
 
-    cout << "�������������� ����������: ";
+    cout << "Горизонтальные координаты: ";
     for (char c : text) {
         if (c != ' ') {
             auto coords = findCoordinates(c);
@@ -124,11 +124,11 @@ void DoublePolybius::demonstrateProcess(string text) {
     for (int v : verticalCoords) allCoords.push_back(v);
     for (int h : horizontalCoords) allCoords.push_back(h);
 
-    cout << "��� ���������� ������: ";
+    cout << "Все координаты подряд: ";
     for (int coord : allCoords) cout << coord << " ";
     cout << endl;
 
-    cout << "���������� - �����: ";
+    cout << "Координаты - буквы: ";
     string result;
     for (size_t i = 0; i < allCoords.size(); i += 2) {
         if (i + 1 < allCoords.size()) {
@@ -139,6 +139,5 @@ void DoublePolybius::demonstrateProcess(string text) {
     }
     cout << endl;
 
-    cout << "������������� �����: " << result << endl;
+    cout << "Зашифрованный текст: " << result << endl;
 }
-
