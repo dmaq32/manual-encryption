@@ -59,3 +59,12 @@ public:
     string decrypt(string text, double* t = nullptr);
 
 };
+
+// Астапова К.А.
+class Scytale {
+    int d;
+public:
+    Scytale(int diam) : d(diam) {}
+    string encrypt(string t, double* t2 = nullptr);
+    string decrypt(string ct, double* t = nullptr);
+};
