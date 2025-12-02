@@ -68,3 +68,13 @@ public:
     string encrypt(string t, double* t2 = nullptr);
     string decrypt(string ct, double* t = nullptr);
 };
+
+// Жаданос М.Ю.
+class Affine {
+public:
+    int modInv(int a, int m);
+    bool checkA(int a);
+    string encrypt(string text, int a, int b, double* t);
+    string decrypt(string text, int a, int b, double* t);
+
+};
