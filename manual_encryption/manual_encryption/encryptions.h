@@ -38,3 +38,24 @@ public:
     string encrypt(const std::string& text, double* t = nullptr);
     string decrypt(const std::string& text, double* t = nullptr);
 };
+
+// Конкин Д.О.
+class DoublePolybius {
+    vector<vector<char>> square;
+
+public:
+    DoublePolybius() : square{
+        {'A','B','C','D','E','F'},
+        {'G','H','I','J','K','L'},
+        {'M','N','O','P','Q','R'},
+        {'S','T','U','V','W','X'},
+        {'Y','Z',' ',' ',' ',' '}
+    } {
+    }
+    pair<int, int> findCoordinates(char letter);
+    char findLetter(int row, int col);
+    void demonstrateProcess(string text);
+    string encrypt(string text, double* t = nullptr);
+    string decrypt(string text, double* t = nullptr);
+
+};
