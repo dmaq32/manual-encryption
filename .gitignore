@@ -1,0 +1,12 @@
+Debug/
+Release/
+x64/
+*.vcxproj.user
+*.sln.docstates
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.db
+.vs/
