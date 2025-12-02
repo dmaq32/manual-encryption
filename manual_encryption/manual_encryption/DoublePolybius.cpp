@@ -1,6 +1,7 @@
+#include <iostream>
 #include "encryptions.h"
 #include <chrono>
-
+using namespace std;
 using namespace chrono;
 pair<int, int> DoublePolybius::findCoordinates(char letter) {
     char upperLetter = toupper(letter);
@@ -94,7 +95,6 @@ string DoublePolybius::decrypt(string cipher,double *t) {
 
 void DoublePolybius::demonstrateProcess(string text) {
     cout << "Исходный текст: " << text << endl;
-
     vector<int> verticalCoords, horizontalCoords;
     cout << "Буквы: ";
     for (char c : text) if (c != ' ') cout << c << " ";

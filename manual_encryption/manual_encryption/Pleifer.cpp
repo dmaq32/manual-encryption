@@ -80,7 +80,6 @@ string Pleifer::encrypt(const string& plaintext,double *t) {
     string preparedText = prepareText(plaintext);
     string ciphertext;
 
-    cout << "»ÒıÓ‰Ì˚È ÚÂÍÒÚ: " << plaintext << endl;
 
     for (size_t i = 0; i < preparedText.length(); i += 2) {
         char first = preparedText[i];
