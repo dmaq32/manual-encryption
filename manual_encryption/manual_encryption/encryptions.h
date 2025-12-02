@@ -9,3 +9,22 @@ public:
     string vigenere(string text, string key, double* t = nullptr, bool decryption = false);
 
 };
+
+// Плеханов И.Г.
+class Pleifer {
+private:
+    string key;
+    vector<vector<char>> matrix;
+
+    void createMatrix();
+    string prepareText(const string& text);
+public:
+    Pleifer(const string& key) : key(key) {
+        createMatrix();
+    }
+    pair<int, int> findPosition(char c);
+    string encrypt(const string& plaintext, double *t = nullptr);
+    string decrypt(const string& ciphertext, double *t = nullptr);
+
+    void printMatrix();
+};
