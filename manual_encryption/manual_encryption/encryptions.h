@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
 using namespace std;
+
 
 // Манукьянц В. А.
 class Vigener {
@@ -27,4 +29,12 @@ public:
     string decrypt(const string& ciphertext, double *t = nullptr);
 
     void printMatrix();
+};
+
+// Ястребцов И.Г.
+class Tritemia {
+public:
+    string get_alphabet();
+    string encrypt(const std::string& text, double* t = nullptr);
+    string decrypt(const std::string& text, double* t = nullptr);
 };
