@@ -45,4 +45,15 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="file_50.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="file_1500.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="file_5000.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

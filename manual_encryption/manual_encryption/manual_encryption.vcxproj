@@ -137,6 +137,11 @@
   <ItemGroup>
     <ClInclude Include="encryptions.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="file_1500.txt" />
+    <Text Include="file_50.txt" />
+    <Text Include="file_5000.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

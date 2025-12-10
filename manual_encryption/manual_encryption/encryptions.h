@@ -46,11 +46,11 @@ class DoublePolybius {
 
 public:
     DoublePolybius() : square{
-        {'A','B','C','D','E','F'},
-        {'G','H','I','J','K','L'},
-        {'M','N','O','P','Q','R'},
-        {'S','T','U','V','W','X'},
-        {'Y','Z',' ',' ',' ',' '}
+        {'A','B','C','D','E'},
+        {'F','G','H','I','K'},
+        {'L','M','N','O','P'},
+        {'Q','R','S','T','U'},
+        {'V','W','X','Y','Z'}
     } {
     }
     pair<int, int> findCoordinates(char letter);
@@ -150,4 +150,5 @@ public:
     void build_mappings();
     string encrypt_text(const string& plain, double* t = nullptr);
     string decrypt_codes(const string& codes, double* t = nullptr);
+
 };
