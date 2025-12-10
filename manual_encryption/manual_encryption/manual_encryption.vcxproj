@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Affine.cpp" />
     <ClCompile Include="DoublePolybius.cpp" />
+    <ClCompile Include="legrand.cpp" />
     <ClCompile Include="manual_encryption.cpp" />
     <ClCompile Include="Pleifer.cpp" />
     <ClCompile Include="Scytale.cpp" />

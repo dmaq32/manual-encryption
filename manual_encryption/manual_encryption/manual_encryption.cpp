@@ -12,7 +12,6 @@ int main()
     string text_1500 = "vigenere cipher long performance test text for encryption and decryption experiments using only lowercase letters and spaces in order to avoid issues with unsupported characters in a simple alphabet based implementation this text is intentionally verbose and repetitive so that the length reaches more than one thousand five hundred characters without relying on punctuation or digits or special symbols the purpose of such a long sequence of words is to let you measure the speed of your function with realistic but still controlled input data while keeping the structure easy to understand and to compare after encryption and decryption you can check that the original message is restored exactly character by character space by space if your algorithm is implemented correctly the vigenere cipher should transform this long stream of letters into something that looks random while still allowing perfect recovery when the same key is used for decryption a longer text is also useful to reveal logic errors such as incorrect key repetition off by one mistakes or problems with handling spaces and non alphabetic characters in this simplified scenario we choose to leave only letters and spaces so the algorithm can ignore nothing and simply process letters while copying spaces directly to the output the content of this block does not matter from a semantic point of view what matters is variety of letter combinations word lengths and general size of the input string feel free to modify this paragraph by inserting your own sentences random words or even generated content as long as you keep the limitations related to the alphabet you can also duplicate this entire block multiple times if you need even larger input for stress testing purposes or benchmarking on different systems or compilers some developers like to compare execution time between various optimization levels and different data structures using the same fixed input because that makes results comparable and reproducible across test runs and environments in addition a long text increases the chance that subtle bugs will appear early during debugging rather than much later in production environments where problems are harder to trace and to fix quickly";
     cout << "ШИФР ПОЛИБИУСА" << endl;
 
-    //cipher.demonstrateProcess("London is a capital of Great Britain");
     double t_enc1, t_dec1, t_enc11, t_dec11, t_enc111, t_dec111;
     string encrypted_cipher = cipher.encrypt(text_50, &t_enc1);
     cout << "Исходный текст:" << "London is a capital of Great Britain" << endl;
@@ -40,16 +39,16 @@ int main()
     double t_enc3, t_dec3, t_enc33, t_dec33, t_enc333, t_dec333;
     string key;
 
-    cout << endl << "TRITHEMIUS CIPHER";
-    cout << endl << "Original text: " << text_50 << std::endl;
+    cout << endl << "ШИФР ТРИТЕМИУСА";
+    cout << endl << "Исходный текст: " << text_50 << std::endl;
 
     string encrypted = t.encrypt(text_50, &t_enc3);
-    cout << "Encrypted text: " << encrypted << std::endl;
-    cout << "Encryption time: " << t_enc3 << " мкс " << endl;
+    cout << "Зашифрованный текст: " << encrypted << std::endl;
+    cout << "Время дешифрования: " << t_enc3 << " мкс " << endl;
 
     string decrypted = t.decrypt(encrypted, &t_dec3);
-    cout << "Decrypted text: " << decrypted << std::endl;
-    cout << "Decryption time: " << t_dec3 << " мкс " << endl;
+    cout << "Расшифрованный текст: " << decrypted << std::endl;
+    cout << "Время дешифрования: " << t_dec3 << " мкс " << endl;
 
 
     cout << endl << "ШИФР ПЛЕЙФЕРА" << endl;
@@ -83,21 +82,21 @@ int main()
     cout << "Время дешифрования: " << t_dec5 << " мкс" << endl;
 
 
-    //cout << endl << "ВЕЛИКИЙ ШИФР" << endl;
+    cout << endl << "ВЕЛИКИЙ ШИФР" << endl;
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    /*legrand l;
+    legrand l;
     l.build_mappings();
     string plain;
-    plain = "London is a capital of Great Britain";
 
-    double t_enc6, t_dec6;
-    string r1 = l.encrypt_text(plain, &t_enc6);
-    cout << "\nЗашифрованный текст:\n" << r1 << "\nВремя: " << t_enc6 << " мкс\n";
+    double t_enc6, t_dec6, t_enc66, t_dec66, t_enc666, t_dec666;
+    cout << "Исходный текст:" << text_50 << endl;
+    string r1 = l.encrypt_text(text_50, &t_enc6);
+    cout << "Зашифрованный текст:\n" << r1 << "\nВремя: " << t_enc6 << " мкс\n";
     string r2 = l.decrypt_codes(r1, &t_dec6);
     cout << "Расшифровка:\n" << r2 << "\nВремя: " << t_dec6 << " мкс\n";
-    */
+    
 
     cout << endl << "АФИННЫЙ ШИФР:" << endl;
     Affine af;
@@ -146,6 +145,11 @@ int main()
     string dec55 = v.vigenere(enc55, "secret", &t_dec55, true);
     string enc555 = v.vigenere(text_1500, "secret", &t_enc555);
     string dec555 = v.vigenere(enc555, "secret", &t_dec555, true);
+
+    string enc66 = v.vigenere(text_1500, "secret", &t_enc66);
+    string dec66 = v.vigenere(enc66, "secret", &t_dec66, true);
+    string enc666 = v.vigenere(text_1500, "secret", &t_enc666);
+    string dec666 = v.vigenere(enc666, "secret", &t_dec666, true);
 
     string enc77 = af.encrypt(text_500,a, b, &t_enc77);
     string dec77 = af.decrypt(enc77, a, b, &t_dec77);
