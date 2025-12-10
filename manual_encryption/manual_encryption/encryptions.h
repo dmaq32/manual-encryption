@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 
@@ -77,4 +78,76 @@ public:
     string encrypt(string text, int a, int b, double* t);
     string decrypt(string text, int a, int b, double* t);
 
+};
+
+//Цэрнэ Д.В.
+class legrand {
+public:
+    static vector<uint32_t> utf8_to_codepoints(const string& s) {
+        vector<uint32_t> out;
+        size_t i = 0;
+        while (i < s.size()) {
+            unsigned char c = s[i];
+            uint32_t cp = 0;
+            size_t len = 0;
+            if ((c & 0x80) == 0) { cp = c; len = 1; }
+            else if ((c & 0xE0) == 0xC0) {
+                if (i + 1 >= s.size()) break;
+                cp = ((c & 0x1F) << 6) | (s[i + 1] & 0x3F);
+                len = 2;
+            }
+            else if ((c & 0xF0) == 0xE0) {
+                if (i + 2 >= s.size()) break;
+                cp = ((c & 0x0F) << 12) | ((s[i + 1] & 0x3F) << 6) | (s[i + 2] & 0x3F);
+                len = 3;
+            }
+            else if ((c & 0xF8) == 0xF0) {
+                if (i + 3 >= s.size()) break;
+                cp = ((c & 0x07) << 18) | ((s[i + 1] & 0x3F) << 12)
+                    | ((s[i + 2] & 0x3F) << 6) | (s[i + 3] & 0x3F);
+                len = 4;
+            }
+            else break;
+            out.push_back(cp);
+            i += len;
+        }
+        return out;
+    }
+
+    static string codepoint_to_utf8(uint32_t cp) {
+        string s;
+        if (cp <= 0x7F) s.push_back((char)cp);
+        else if (cp <= 0x7FF) {
+            s.push_back((char)(0xC0 | ((cp >> 6) & 0x1F)));
+            s.push_back((char)(0x80 | (cp & 0x3F)));
+        }
+        else if (cp <= 0xFFFF) {
+            s.push_back((char)(0xE0 | ((cp >> 12) & 0x0F)));
+            s.push_back((char)(0x80 | ((cp >> 6) & 0x3F)));
+            s.push_back((char)(0x80 | (cp & 0x3F)));
+        }
+        else {
+            s.push_back((char)(0xF0 | ((cp >> 18) & 0x07)));
+            s.push_back((char)(0x80 | ((cp >> 12) & 0x3F)));
+            s.push_back((char)(0x80 | ((cp >> 6) & 0x3F)));
+            s.push_back((char)(0x80 | (cp & 0x3F)));
+        }
+        return s;
+    }
+
+    static uint32_t to_lower_cp(uint32_t cp) {
+        if (cp >= 'A' && cp <= 'Z') return cp + 32;
+        return cp;
+    }
+
+    static bool is_letter_or_space(uint32_t cp) {
+        return (cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || cp == 0x20;
+    }
+
+    unordered_map<string, int> syllable_to_code;
+    unordered_map<int, string> code_to_syllable;
+
+    void build_mappings();
+    string encrypt_text(const string& plain, double* t = nullptr);
+    string decrypt_codes(const string& codes, double* t = nullptr);
 };
