@@ -17,20 +17,26 @@ public:
 class Pleifer {
 private:
     string key;
-    vector<vector<char>> matrix;
+    vector<vector<unsigned char>> matrix;
+    vector<unsigned char> availablePaddingChars;
 
     void createMatrix();
+    void initAvailablePaddingChars();
+    unsigned char getRandomPaddingChar(const string& text);
     string prepareText(const string& text);
+    pair<int, int> findPosition(unsigned char c);
+    
 public:
     Pleifer(const string& key) : key(key) {
         createMatrix();
     }
-    pair<int, int> findPosition(char c);
-    string encrypt(const string& plaintext, double *t = nullptr);
-    string decrypt(const string& ciphertext, double *t = nullptr);
+    
+    string encrypt(const string& plaintext, double* t = nullptr);
+    string decrypt(const string& ciphertext, double* t = nullptr);
 
-    void printMatrix();
+    static string toHexString(const string& data);
 };
+
 
 // Ястребцов И.Г.
 class Tritemia {
