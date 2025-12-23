@@ -6,7 +6,7 @@ using namespace std;
 using namespace chrono;
 
 string Tritemia::get_alphabet() {
-    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@^_{|}~`";
 }
 
 
@@ -17,7 +17,7 @@ string Tritemia::encrypt(const std::string& text, double* t) {
     std::string result = "";
 
     for (size_t i = 0; i < text.length(); i++) {
-        size_t pos = alphabet.find(std::toupper(text[i]));
+        size_t pos = alphabet.find(text[i]);
 
         if (pos != std::string::npos) {
             size_t new_pos = (pos + i) % alphabet.length();
@@ -43,7 +43,7 @@ string Tritemia::decrypt(const std::string& text, double* t) {
     std::string result = "";
 
     for (size_t i = 0; i < text.length(); i++) {
-        size_t pos = alphabet.find(std::toupper(text[i]));
+        size_t pos = alphabet.find(text[i]);
 
         if (pos != std::string::npos) {
             size_t original_pos = (pos - i + alphabet.length()) % alphabet.length();
