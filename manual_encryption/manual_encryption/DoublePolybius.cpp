@@ -4,9 +4,10 @@
 using namespace std;
 using namespace chrono;
 
+
 pair<int, int> DoublePolybius::findCoordinates(char letter) {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 8; j++) {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
             if (square[i][j] == letter) {
                 return { i + 1, j + 1 };
             }
@@ -16,7 +17,7 @@ pair<int, int> DoublePolybius::findCoordinates(char letter) {
 }
 
 char DoublePolybius::findLetter(int row, int col) {
-    if (row >= 1 && row <= 10 && col >= 1 && col <= 8) {
+    if (row >= 1 && row <= 9 && col >= 1 && col <= 9) {
         return square[row - 1][col - 1];
     }
     return ' ';
