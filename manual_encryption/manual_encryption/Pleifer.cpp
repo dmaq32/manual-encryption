@@ -17,7 +17,7 @@ void Pleifer::createMatrix() {
     vector<unsigned char> keyWithoutDuplicates;
 
     for (unsigned char c : key) {
-        if (find(keyWithoutDuplicates.begin(), keyWithoutDuplicates.end(), c) 
+        if (find(keyWithoutDuplicates.begin(), keyWithoutDuplicates.end(), c)
             == keyWithoutDuplicates.end()) {
             keyWithoutDuplicates.push_back(c);
         }
@@ -37,7 +37,7 @@ void Pleifer::createMatrix() {
     for (int asciiCode = 0; asciiCode < 256; asciiCode++) {
         unsigned char c = static_cast<unsigned char>(asciiCode);
 
-        if (find(keyWithoutDuplicates.begin(), keyWithoutDuplicates.end(), c) 
+        if (find(keyWithoutDuplicates.begin(), keyWithoutDuplicates.end(), c)
             != keyWithoutDuplicates.end()) {
             continue;
         }
@@ -222,4 +222,34 @@ string Pleifer::toHexString(const string& data) {
         ss << "\\x" << setw(2) << static_cast<int>(c);
     }
     return ss.str();
+}
+
+using namespace std;
+
+int main() {
+    string key, text;
+
+    cout << "Введите ключ: ";
+    getline(cin, key);
+
+    cout << "Введите текст для шифрования: ";
+    getline(cin, text);
+
+    Pleifer cipher(key);
+
+    double encryptTime, decryptTime;
+
+    string encrypted = cipher.encrypt(text, &encryptTime);
+    string decrypted = cipher.decrypt(encrypted, &decryptTime);
+
+    cout << "\nЗашифрованный текст (hex): ";
+    for (unsigned char c : encrypted) {
+        cout << "\\x" << hex << setw(2) << setfill('0') << (int)c << dec;
+    }
+    cout << "\nВремя шифрования: " << encryptTime << " мкс" << endl;
+
+    cout << "\nРасшифрованный текст: " << decrypted << endl;
+    cout << "Время дешифрования: " << decryptTime << " мкс" << endl;
+
+    return 0;
 }
