@@ -86,6 +86,8 @@ public:
     bool checkA(int a);
     string encrypt(string text, int a, int b, double* t);
     string decrypt(string text, int a, int b, double* t);
+    string buildAlphabet();
+    unordered_map<unsigned char, int> buildPosMap();
 
 };
 
