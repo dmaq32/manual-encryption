@@ -3,11 +3,11 @@
 #include <chrono>
 using namespace std;
 using namespace chrono;
+
 pair<int, int> DoublePolybius::findCoordinates(char letter) {
-    char upperLetter = toupper(letter);
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (square[i][j] == upperLetter) {
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (square[i][j] == letter) {
                 return { i + 1, j + 1 };
             }
         }
@@ -16,7 +16,7 @@ pair<int, int> DoublePolybius::findCoordinates(char letter) {
 }
 
 char DoublePolybius::findLetter(int row, int col) {
-    if (row >= 1 && row <= 5 && col >= 1 && col <= 5) {
+    if (row >= 1 && row <= 10 && col >= 1 && col <= 8) {
         return square[row - 1][col - 1];
     }
     return ' ';
@@ -28,11 +28,9 @@ string DoublePolybius::encrypt(string text, double* t) {
     vector<int> verticalCoords, horizontalCoords;
 
     for (char character : text) {
-        if (character != ' ') {
-            auto coords = findCoordinates(character);
-            verticalCoords.push_back(coords.first);
-            horizontalCoords.push_back(coords.second);
-        }
+        auto coords = findCoordinates(character);
+        verticalCoords.push_back(coords.first);
+        horizontalCoords.push_back(coords.second);
     }
 
     vector<int> allCoords;
@@ -63,11 +61,9 @@ string DoublePolybius::decrypt(string cipher,double *t) {
 
     vector<int> allCoords;
     for (char character : cipher) {
-        if (character != ' ') {
-            auto coords = findCoordinates(character);
-            allCoords.push_back(coords.first);
-            allCoords.push_back(coords.second);
-        }
+        auto coords = findCoordinates(character);
+        allCoords.push_back(coords.first);
+        allCoords.push_back(coords.second);
     }
 
     int half = allCoords.size() / 2;
@@ -97,26 +93,22 @@ void DoublePolybius::demonstrateProcess(string text) {
     cout << "Исходный текст: " << text << endl;
     vector<int> verticalCoords, horizontalCoords;
     cout << "Буквы: ";
-    for (char c : text) if (c != ' ') cout << c << " ";
+    for (char c : text) cout << c << " ";
     cout << endl;
 
     cout << "Вертикальные координаты:   ";
     for (char c : text) {
-        if (c != ' ') {
-            auto coords = findCoordinates(c);
-            verticalCoords.push_back(coords.first);
-            cout << coords.first << " ";
-        }
+        auto coords = findCoordinates(c);
+        verticalCoords.push_back(coords.first);
+        cout << coords.first << " ";
     }
     cout << endl;
 
     cout << "Горизонтальные координаты: ";
     for (char c : text) {
-        if (c != ' ') {
-            auto coords = findCoordinates(c);
-            horizontalCoords.push_back(coords.second);
-            cout << coords.second << " ";
-        }
+        auto coords = findCoordinates(c);
+        horizontalCoords.push_back(coords.second);
+        cout << coords.second << " ";
     }
     cout << endl;
 
