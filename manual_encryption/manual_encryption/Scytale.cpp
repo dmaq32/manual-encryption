@@ -7,9 +7,9 @@ using namespace std;
 string Scytale::encrypt(string t, double* t2) {
     auto start = steady_clock::now();
 
-    string s;
-    for (char c : t) if (c != ' ') s += toupper(c);
-    int len = s.length(), r = (len + d - 1) / d;
+    string s = t;
+    int len = s.length();
+    int r = (len + d - 1) / d;
 
     string res;
     for (int col = 0; col < d; col++) {
@@ -18,7 +18,7 @@ string Scytale::encrypt(string t, double* t2) {
             if (pos < len)
                 res += s[pos];
             else
-                res += 'X';
+                res += ' ';
         }
     }
 
@@ -32,7 +32,8 @@ string Scytale::encrypt(string t, double* t2) {
 string Scytale::decrypt(string ct, double* t) {
     auto start = steady_clock::now();
 
-    int len = ct.length(), r = len / d;
+    int len = ct.length();
+    int r = len / d; 
     string res;
 
     for (int row = 0; row < r; row++) {
@@ -43,12 +44,15 @@ string Scytale::decrypt(string ct, double* t) {
         }
     }
 
-    size_t last = res.find_last_not_of('X');
-    if (last != string::npos) res = res.substr(0, last + 1);
+    size_t last = res.find_last_not_of(' ');
+    if (last != string::npos)
+        res = res.substr(0, last + 1);
+    else
+        res = "";
 
     if (t != nullptr) {
         auto end = steady_clock::now();
         *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }   
+    }
     return res;
 }
