@@ -129,6 +129,12 @@ int main()
     if (b < 0) b += 26;
 
     cin.ignore();
+
+
+
+
+
+
     string enc7 = af.encrypt(text_50, a, b, &t_enc7);
     string dec7 = af.decrypt(enc7, a, b, &t_dec7);
 
@@ -167,10 +173,38 @@ int main()
     string enc777 = af.encrypt(text_5000, a, b, &t_enc777);
     string dec777 = af.decrypt(enc777, a, b, &t_dec777);
 
+
     cout << "Encrypted: " << enc7 << endl;
     cout << "Encryption time:" << t_enc7 << endl;
     cout << "Decrypted: " << dec7 << endl;
     cout << "Decryption time:" << t_dec7 << endl;
+
+
+
+
+    Atbash atbash;
+    cout << endl << "ШИФР АТБАШ" << endl;
+
+    double t_enc8, t_dec8, t_enc88, t_dec88, t_enc888, t_dec888;
+    string encrypted_atbash = atbash.EncryptDecrypt(text_50, &t_enc8);
+    cout << "Исходный текст:" << "London is the capital of Great Britain" << endl;
+    cout << "Зашифрованный текст:" << encrypted_atbash << endl;
+    cout << "Время шифрования: " << t_enc8 << " мкс " << endl;
+
+    string decrypted_atbash = atbash.EncryptDecrypt(encrypted_atbash, &t_dec8);
+    cout << "Расшифрованный текст:" << decrypted_atbash << endl;
+    cout << "Время дешифрования: " << t_dec8 << " мкс " << endl;
+
+    string enc88 = atbash.EncryptDecrypt(text_1500, &t_enc88);
+    string dec88 = atbash.EncryptDecrypt(enc88, &t_dec88);
+    string enc888 = atbash.EncryptDecrypt(text_5000, &t_enc888);
+    string dec888 = atbash.EncryptDecrypt(enc888, &t_dec888);
+
+
+
+
+
+
 
     cout << endl << "Сравнение скорости шифрования/дешифрования:" << endl << endl;
 
@@ -183,6 +217,7 @@ int main()
     cout << "Шифр Виженера: " << t_enc5 << " мкс" << endl;
     cout << "Великий шифр: " << t_enc6 << " мкс" << endl;
     cout << "Аффинный шифр:" << t_enc7 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_enc8 << " мкс" << endl;
 
     cout << endl << "Дешифрование" << endl;
     cout << "Шифр Полибиуса: " << t_dec1 << " мкс" << endl;
@@ -192,6 +227,7 @@ int main()
     cout << "Шифр Виженера: " << t_dec5 << " мкс" << endl;
     cout << "Великий шифр: " << t_dec6 << " мкс" << endl;
     cout << "Аффинный шифр: " << t_dec7 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_dec8 << " мкс" << endl;
 
     cout << endl << endl << "Текст ~ 1500 символов " << endl << endl;
     cout << "Шифрование" << endl;
@@ -202,6 +238,7 @@ int main()
     cout << "Шифр Виженера: " << t_enc55 << " мкс" << endl;
     cout << "Великий шифр: " << t_enc66 << " мкс" << endl;
     cout << "Аффинный шифр:" << t_enc77 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_enc88 << " мкс" << endl;
 
     cout << endl << "Дешифрование" << endl;
     cout <<  "Шифр Полибиуса: " << t_dec11 << " мкс" << endl;
@@ -211,6 +248,7 @@ int main()
     cout << "Шифр Виженера: " << t_dec55 << " мкс" << endl;
     cout << "Великий шифр: " << t_dec66 << " мкс" << endl;
     cout << "Аффинный шифр: " << t_dec77 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_dec88 << " мкс" << endl;
 
     cout << endl << endl <<  "Текст ~ 5000 символов " << endl << endl;
     cout << "Шифрование" << endl;
@@ -221,6 +259,8 @@ int main()
     cout << "Шифр Виженера: " << t_enc555 << " мкс" << endl;
     cout << "Великий шифр: " << t_enc666 << " мкс" << endl;
     cout << "Аффинный шифр:" << t_enc777 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_enc888 << " мкс" << endl;
+
     cout << endl << "Дешифрование" << endl;
     cout << "Шифр Полибиуса: " << t_dec111 << " мкс" << endl;
     cout << "Шифр Сциталы: " << t_dec222 << " мкс" << endl;
@@ -229,6 +269,7 @@ int main()
     cout << "Шифр Виженера: " << t_dec555 << " мкс" << endl;
     cout << "Великий шифр: " << t_dec666 << " мкс" << endl;
     cout << "Аффинный шифр: " << t_dec777 << " мкс" << endl;
+    cout << "Шифр Атбаш:" << t_dec888 << " мкс" << endl;
 
     
 }

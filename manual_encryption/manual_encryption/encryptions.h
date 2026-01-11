@@ -5,6 +5,17 @@
 using namespace std;
 
 
+
+
+// Грибков К. О.
+class Atbash {
+public:
+    std::string EncryptDecrypt(const std::string& text, double* t = nullptr);
+};
+
+
+
+
 // Манукьянц В. А.
 class Vigener {
 public:
@@ -90,6 +101,7 @@ public:
     unordered_map<unsigned char, int> buildPosMap();
 
 };
+
 
 //Цэрнэ Д.В.
 class legrand {

@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -131,6 +131,7 @@
     <ClCompile Include="manual_encryption.cpp" />
     <ClCompile Include="Pleifer.cpp" />
     <ClCompile Include="Scytale.cpp" />
+    <ClCompile Include="Atbash.cpp" />
     <ClCompile Include="Tritemia.cpp" />
     <ClCompile Include="Vigener.cpp" />
   </ItemGroup>
