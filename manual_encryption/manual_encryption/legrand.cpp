@@ -54,7 +54,7 @@ void legrand::build_mappings() {
     code_to_syllable[999] = "???";
 }
 
-string legrand::encrypt_text(const string& plain, double* t) {
+string legrand::encrypt_text(const string& plain) {
     vector<uint32_t> cps = utf8_to_codepoints(plain);
     vector<uint32_t> norm;
     for (auto cp : cps)
@@ -95,20 +95,15 @@ string legrand::encrypt_text(const string& plain, double* t) {
             ++i;
         }
     }
-
-    if (t) *t = chrono::duration_cast<chrono::microseconds>(
-        steady_clock::now() - start).count();
     return out;
 }
 
-string legrand::decrypt_codes(const string& codes, double* t) {
-    auto start = steady_clock::now();
+string legrand::decrypt_codes(const string& codes) {
     string s;
     for (char c : codes)
         if (isdigit(c) || isspace(c))
             s.push_back(c);
 
-    if (t) *t = 0;
 
     bool hasSpace = false;
     for (char c : s) if (isspace((unsigned char)c)) hasSpace = true;
@@ -143,8 +138,5 @@ string legrand::decrypt_codes(const string& codes, double* t) {
         else
             out += '?';
     }
-
-    if (t) *t = chrono::duration_cast<chrono::microseconds>(
-        steady_clock::now() - start).count();
     return out;
 }

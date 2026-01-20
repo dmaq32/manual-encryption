@@ -11,6 +11,16 @@ string read_file(const string& filename) {
     }
     return text;
 }
+template<typename Func, typename... Args>
+auto Time(Func&& func, Args&&... args) {
+    auto start = chrono::high_resolution_clock::now();
+
+    std::invoke(forward<Func>(func), forward<Args>(args)...);
+
+    auto end = high_resolution_clock::now();
+    return chrono::duration_cast<microseconds>(end - start);
+}
+
 int main()
 {
 
@@ -24,11 +34,13 @@ int main()
     cout << "ШИФР ПОЛИБИУСА" << endl;
 
     double t_enc1, t_dec1, t_enc11, t_dec11, t_enc111, t_dec111;
-    string encrypted_cipher = cipher.encrypt(text_50, &t_enc1);
+    string encrypted_cipher = cipher.encrypt(text_50);
+    t_enc1 = Time(cipher.encrypt(text_50)).count();
     cout << "Исходный текст:" << "London is the capital of Great Britain" << endl;
     cout << "Зашифрованный текст:" << encrypted_cipher << endl;
     cout << "Время шифрования: " << t_enc1 << " мкс " << endl;
-    string decrypted_cipher = cipher.decrypt(encrypted_cipher, &t_dec1);
+    string decrypted_cipher = cipher.decrypt(encrypted_cipher);
+    t_dec1 = Time(cipher.decrypt(encrypted_cipher)).count();
     cout << "Расшифрованный текст:" << decrypted_cipher << endl;
     cout << "Время дешифрования: " << t_dec1 << " мкс " << endl;
 
@@ -38,10 +50,12 @@ int main()
     double t_enc2, t_dec2, t_enc22, t_dec22, t_enc222, t_dec222;
     Scytale c(5);
     cout << "Исходное слово/предложение: " << text_50 << endl;
-    string enc = c.encrypt(text_50, &t_enc2);
+    string enc = c.encrypt(text_50);;
+    t_enc2 = Time(c.encrypt(text_50)).count();
     cout << "Зашифрованное слово: " << enc << endl;
     cout << "Время шифрования: " << t_enc2 << " мкс " << endl;
-    string dec = c.decrypt(enc, &t_dec2);
+    t_dec2 = Time(c.decrypt(enc)).count();
+    string dec = c.decrypt(enc);
     cout << "Расшифрованный текст: " << dec << endl;
     cout << "Время дешифрования: " << t_dec2 << " мкс " << endl;
 
@@ -53,11 +67,13 @@ int main()
     cout << endl << "ШИФР ТРИТЕМИЯ";
     cout << endl << "Исходный текст: " << text_50 << std::endl;
 
-    string encrypted = t.encrypt(text_50, &t_enc3);
+    string encrypted = t.encrypt(text_50);
+    t_enc3 = Time(t.encrypt(text_50)).count();
     cout << "Зашифрованный текст: " << encrypted << std::endl;
     cout << "Время дешифрования: " << t_enc3 << " мкс " << endl;
 
-    string decrypted = t.decrypt(encrypted, &t_dec3);
+    string decrypted = t.decrypt(encrypted);
+    t_dec3 = Time(c.decrypt(encrypted)).count();
     cout << "Расшифрованный текст: " << decrypted << std::endl;
     cout << "Время дешифрования: " << t_dec3 << " мкс " << endl;
 
@@ -72,11 +88,14 @@ int main()
     Pleifer cipher_pleifer(key);
     double encryptTime, decryptTime;
 
-    string encrypted_pleifer = cipher_pleifer.encrypt(text_50, &t_enc4);
+
+    string encrypted_pleifer = cipher_pleifer.encrypt(text_50);
+    t_enc4 = Time(cipher_pleifer.decrypt(text_50)).count();
     cout << "Зашифрованный текст: " << encrypted_pleifer << endl;
     cout << "Время шифрования: " << t_enc4 << " мкс " << endl;
 
-    string decrypted_pleifer = cipher_pleifer.decrypt(encrypted_pleifer, &t_dec4);
+    string decrypted_pleifer = cipher_pleifer.decrypt(encrypted_pleifer);
+    t_dec4 = Time(cipher_pleifer.decrypt(encrypted_pleifer)).count();
     cout << "Расшифрованный текст: " << decrypted_pleifer << endl;
     cout << "Время дешифрования: " << t_dec4 << " мкс " << endl;
 
@@ -84,11 +103,13 @@ int main()
 
     double t_enc5, t_dec5, t_enc55, t_dec55, t_enc555, t_dec555;
     Vigener v;
-    string crypted = v.vigenere(text_50, "secret", &t_enc5);
-    string decrypted_vigener = v.vigenere(crypted, "secret", &t_dec5, true);
+    string crypted = v.vigenere(text_50, "secret");
+    t_enc5 = Time(v.vigenere(text_50,"secret")).count();
+    string decrypted_vigener = v.vigenere(crypted, "secret", true);
     cout << "Исходный текст:" << text_50 << endl;
     cout << "Зашифрованный текст: " << crypted << endl;
     cout << "Время шифрования: " << t_enc5 << " мкс" << endl;
+    t_dec5 = Time(v.vigenere(crypted, "secret",true)).count();
     cout << decrypted_vigener << endl;
     cout << "Время дешифрования: " << t_dec5 << " мкс" << endl;
 
@@ -103,9 +124,11 @@ int main()
 
     double t_enc6, t_dec6, t_enc66, t_dec66, t_enc666, t_dec666;
     cout << "Исходный текст:" << text_50 << endl;
-    string r1 = l.encrypt_text(text_50, &t_enc6);
+    string r1 = l.encrypt_text(text_50);
+    t_enc6 = Time(l.encrypt_text(text_50)).count();
     cout << "Зашифрованный текст:\n" << r1 << "\nВремя: " << t_enc6 << " мкс\n";
-    string r2 = l.decrypt_codes(r1, &t_dec6);
+    string r2 = l.decrypt_codes(r1);
+    t_dec6 = Time(l.decrypt_codes(r1)).count();
     cout << "Расшифровка:\n" << r2 << "\nВремя: " << t_dec6 << " мкс\n";
     
 
@@ -131,47 +154,77 @@ int main()
     cin.ignore();
 
 
+    t_enc7 = Time(af.encrypt(text_50,a,b)).count();
+    t_dec7 = Time(af.encrypt(enc, a, b)).count();
 
 
+    string enc7 = af.encrypt(text_50, a, b);
+    string dec7 = af.decrypt(enc7, a, b);
+
+    string enc11 = cipher.encrypt(text_1500);
+    t_enc11 = Time(cipher.encrypt(text_1500)).count();
+    string dec11 = cipher.decrypt(enc11);
+    t_dec11 = Time(cipher.encrypt(enc11)).count();
+    string enc111 = cipher.encrypt(text_5000);
+    t_enc111 = Time(cipher.encrypt(text_5000)).count();
+    string dec111 = cipher.decrypt(enc111);
+    t_dec111 = Time(cipher.encrypt(enc111)).count();
+
+    string enc22 = c.encrypt(text_1500);
+    t_enc22 = Time(c.encrypt(text_1500)).count();
+    string dec22 = c.decrypt(enc22);
+    t_dec22 = Time(c.encrypt(enc22)).count();
+    string enc222 = c.encrypt(text_5000);
+    t_enc222 = Time(c.encrypt(text_5000)).count();
+    string dec222 = c.decrypt(enc222);
+    t_dec222 = Time(c.encrypt(enc222)).count();
+
+    string enc33 = t.encrypt(text_1500);
+    t_enc33 = Time(t.encrypt(text_1500)).count();
+    string dec33 = t.decrypt(enc33);
+    t_dec33 = Time(t.encrypt(enc33)).count();
+    string enc333 = t.encrypt(text_5000);
+    t_enc333 = Time(t.encrypt(text_5000)).count();
+    string dec333 = t.decrypt(enc333);
+    t_dec33 = Time(t.encrypt(enc333)).count();
+
+    string enc44 = cipher_pleifer.encrypt(text_1500);
+    t_enc44 = Time(cipher_pleifer.encrypt(text_1500)).count();
+    string dec44 = cipher_pleifer.decrypt(enc44);
+    t_dec44 = Time(cipher_pleifer.encrypt(enc44)).count();
+    string enc444 = cipher_pleifer.encrypt(text_5000);
+    t_enc444 = Time(cipher_pleifer.encrypt(text_5000)).count();
+    string dec444 = cipher_pleifer.decrypt(enc444);
+    t_dec444 = Time(cipher_pleifer.encrypt(enc444)).count();
+
+    string enc55 = v.vigenere(text_1500, "secret");
+    t_enc55 = Time(v.vigenere(text_1500,"secret")).count();
+    string dec55 = v.vigenere(enc55, "secret", true);
+    t_dec55 = Time(v.vigenere(enc55, "secret",true)).count();
+    string enc555 = v.vigenere(text_5000, "secret");
+    t_enc555 = Time(v.vigenere(text_5000, "secret")).count();
+    string dec555 = v.vigenere(enc555, "secret", true);
+    t_dec555 = Time(v.vigenere(enc555, "secret",true)).count();
 
 
-    string enc7 = af.encrypt(text_50, a, b, &t_enc7);
-    string dec7 = af.decrypt(enc7, a, b, &t_dec7);
+    string enc66 = l.encrypt_text(text_1500);
+    t_enc66 = Time(l.encrypt_text(text_1500)).count();
+    string dec66 = l.encrypt_text(enc66);
+    t_dec66 = Time(l.encrypt_text(enc66)).count();
+    string enc666 = l.encrypt_text(text_5000);
+    t_enc666 = Time(l.encrypt_text(text_5000)).count();
+    string dec666 = l.encrypt_text(enc666);
+    t_dec666 = Time(l.encrypt_text(enc666)).count();
 
-    string enc11 = cipher.encrypt(text_1500, &t_enc11);
-    string dec11 = cipher.decrypt(enc11, &t_dec11);
-    string enc111 = cipher.encrypt(text_5000, &t_enc111);
-    string dec111 = cipher.decrypt(enc111, &t_dec111);
 
-    string enc22 = c.encrypt(text_1500, &t_enc22);
-    string dec22 = c.decrypt(enc22, &t_dec22);
-    string enc222 = c.encrypt(text_5000, &t_enc222);
-    string dec222 = c.decrypt(enc222, &t_dec222);
-
-    string enc33 = t.encrypt(text_1500, &t_enc33);
-    string dec33 = t.decrypt(enc33, &t_dec33);
-    string enc333 = t.encrypt(text_5000, &t_enc333);
-    string dec333 = t.decrypt(enc333, &t_dec333);
-
-    string enc44 = cipher_pleifer.encrypt(text_1500, &t_enc44);
-    string dec44 = cipher_pleifer.decrypt(enc44, &t_dec44);
-    string enc444 = cipher_pleifer.encrypt(text_5000, &t_enc444);
-    string dec444 = cipher_pleifer.decrypt(enc444, &t_dec444);
-
-    string enc55 = v.vigenere(text_1500, "secret", &t_enc55);
-    string dec55 = v.vigenere(enc55, "secret", &t_dec55, true);
-    string enc555 = v.vigenere(text_5000, "secret", &t_enc555);
-    string dec555 = v.vigenere(enc555, "secret", &t_dec555, true);
-
-    string enc66 = v.vigenere(text_1500, "secret", &t_enc66);
-    string dec66 = v.vigenere(enc66, "secret", &t_dec66, true);
-    string enc666 = v.vigenere(text_5000, "secret", &t_enc666);
-    string dec666 = v.vigenere(enc666, "secret", &t_dec666, true);
-
-    string enc77 = af.encrypt(text_1500,a, b, &t_enc77);
-    string dec77 = af.decrypt(enc77, a, b, &t_dec77);
-    string enc777 = af.encrypt(text_5000, a, b, &t_enc777);
-    string dec777 = af.decrypt(enc777, a, b, &t_dec777);
+    string enc77 = af.encrypt(text_1500,a, b);
+    t_enc77 = Time(af.encrypt(text_1500,a,b)).count();
+    string dec77 = af.decrypt(enc77, a, b);
+    t_enc77 = Time(af.encrypt(enc77, a, b)).count();
+    string enc777 = af.encrypt(text_5000, a, b);
+    t_enc777 = Time(af.encrypt(text_5000, a, b)).count();
+    string dec777 = af.decrypt(enc777, a, b);
+    t_enc77 = Time(af.encrypt(enc777, a, b)).count();
 
 
     cout << "Encrypted: " << enc7 << endl;
@@ -186,19 +239,23 @@ int main()
     cout << endl << "ШИФР АТБАШ" << endl;
 
     double t_enc8, t_dec8, t_enc88, t_dec88, t_enc888, t_dec888;
-    string encrypted_atbash = atbash.EncryptDecrypt(text_50, &t_enc8);
+    string encrypted_atbash = atbash.EncryptDecrypt(text_50);
     cout << "Исходный текст:" << "London is the capital of Great Britain" << endl;
     cout << "Зашифрованный текст:" << encrypted_atbash << endl;
     cout << "Время шифрования: " << t_enc8 << " мкс " << endl;
 
-    string decrypted_atbash = atbash.EncryptDecrypt(encrypted_atbash, &t_dec8);
+    string decrypted_atbash = atbash.EncryptDecrypt(encrypted_atbash);
     cout << "Расшифрованный текст:" << decrypted_atbash << endl;
     cout << "Время дешифрования: " << t_dec8 << " мкс " << endl;
 
-    string enc88 = atbash.EncryptDecrypt(text_1500, &t_enc88);
-    string dec88 = atbash.EncryptDecrypt(enc88, &t_dec88);
-    string enc888 = atbash.EncryptDecrypt(text_5000, &t_enc888);
-    string dec888 = atbash.EncryptDecrypt(enc888, &t_dec888);
+    string enc88 = atbash.EncryptDecrypt(text_1500);
+    t_enc88 = Time(atbash.EncryptDecrypt(text_1500)).count();
+    string dec88 = atbash.EncryptDecrypt(enc88);
+    t_dec88 = Time(atbash.EncryptDecrypt(enc88)).count();
+    string enc888 = atbash.EncryptDecrypt(text_5000);
+    t_enc888 = Time(atbash.EncryptDecrypt(text_5000)).count();
+    string dec888 = atbash.EncryptDecrypt(enc888);
+    t_dec888 = Time(atbash.EncryptDecrypt(enc888)).count();
 
 
 

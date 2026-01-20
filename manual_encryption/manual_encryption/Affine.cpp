@@ -59,7 +59,7 @@ bool Affine::checkA(int a) {
     return gcd(a, m) == 1;
 }
 
-string Affine::encrypt(string text, int a, int b, double* t) {
+string Affine::encrypt(string text, int a, int b) {
     auto start = steady_clock::now();
 
     const int m = (int)kAlphabet.size();
@@ -82,15 +82,10 @@ string Affine::encrypt(string text, int a, int b, double* t) {
         result += kAlphabet[y];
     }
 
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
     return result;
 }
 
-string Affine::decrypt(string text, int a, int b, double* t) {
-    auto start = steady_clock::now();
+string Affine::decrypt(string text, int a, int b) {
 
     const int m = (int)kAlphabet.size();
     if (!checkA(a)) return "ERROR";
@@ -113,11 +108,6 @@ string Affine::decrypt(string text, int a, int b, double* t) {
         int x = (a_inv * (y - b)) % m;
         if (x < 0) x += m;
         result += kAlphabet[x];
-    }
-
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
     }
     return result;
 }

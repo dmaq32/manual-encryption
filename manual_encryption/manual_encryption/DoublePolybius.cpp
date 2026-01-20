@@ -23,8 +23,7 @@ char DoublePolybius::findLetter(int row, int col) {
     return ' ';
 }
 
-string DoublePolybius::encrypt(string text, double* t) {
-    auto start = steady_clock::now();
+string DoublePolybius::encrypt(string text) {
 
     vector<int> verticalCoords, horizontalCoords;
 
@@ -49,16 +48,10 @@ string DoublePolybius::encrypt(string text, double* t) {
             result += newLetter;
         }
     }
-
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
     return result;
 }
 
-string DoublePolybius::decrypt(string cipher,double *t) {
-    auto start = steady_clock::now();
+string DoublePolybius::decrypt(string cipher) {
 
     vector<int> allCoords;
     for (char character : cipher) {
@@ -81,11 +74,6 @@ string DoublePolybius::decrypt(string cipher,double *t) {
     for (size_t i = 0; i < verticalCoords.size() && i < horizontalCoords.size(); i++) {
         char originalLetter = findLetter(verticalCoords[i], horizontalCoords[i]);
         result += originalLetter;
-    }
-
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
     }
     return result;
 }

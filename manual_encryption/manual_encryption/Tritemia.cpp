@@ -10,8 +10,7 @@ string Tritemia::get_alphabet() {
 }
 
 
-string Tritemia::encrypt(const std::string& text, double* t) {
-    auto start = high_resolution_clock::now();
+string Tritemia::encrypt(const std::string& text) {
 
     std::string alphabet = get_alphabet();
     std::string result = "";
@@ -27,17 +26,10 @@ string Tritemia::encrypt(const std::string& text, double* t) {
             result += text[i];
         }
     }
-
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
-
     return result;
 }
 
-string Tritemia::decrypt(const std::string& text, double* t) {
-    auto start = steady_clock::now();
+string Tritemia::decrypt(const std::string& text) {
 
     std::string alphabet = get_alphabet();
     std::string result = "";
@@ -54,9 +46,5 @@ string Tritemia::decrypt(const std::string& text, double* t) {
         }
     }
 
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
     return result;
 }

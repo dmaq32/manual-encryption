@@ -4,8 +4,7 @@
 using namespace chrono;
 using namespace std;
 
-string Scytale::encrypt(string t, double* t2) {
-    auto start = steady_clock::now();
+string Scytale::encrypt(string t) {
 
     string s = t;
     int len = s.length();
@@ -21,16 +20,10 @@ string Scytale::encrypt(string t, double* t2) {
                 res += ' ';
         }
     }
-
-    if (t2 != nullptr) {
-        auto end = steady_clock::now();
-        *t2 = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
     return res;
 }
 
-string Scytale::decrypt(string ct, double* t) {
-    auto start = steady_clock::now();
+string Scytale::decrypt(string ct) {
 
     int len = ct.length();
     int r = len / d; 
@@ -50,9 +43,5 @@ string Scytale::decrypt(string ct, double* t) {
     else
         res = "";
 
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    }
     return res;
 }

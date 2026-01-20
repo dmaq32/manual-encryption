@@ -117,8 +117,7 @@ pair<int, int> Pleifer::findPosition(unsigned char c) {
     return {-1, -1};
 }
 
-string Pleifer::encrypt(const string& plaintext, double* t) {
-    auto start = steady_clock::now();
+string Pleifer::encrypt(const string& plaintext) {
 
     string preparedText = prepareText(plaintext);
     string ciphertext;
@@ -152,16 +151,10 @@ string Pleifer::encrypt(const string& plaintext, double* t) {
         ciphertext += enc2;
     }
 
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = duration_cast<microseconds>(end - start).count();
-    }
-
     return ciphertext;
 }
 
-string Pleifer::decrypt(const string& ciphertext, double* t) {
-    auto start = steady_clock::now();
+string Pleifer::decrypt(const string& ciphertext) {
 
     string preparedText = prepareText(ciphertext);
     string plaintext;
@@ -206,12 +199,6 @@ string Pleifer::decrypt(const string& ciphertext, double* t) {
     if (!cleanedResult.empty() && cleanedResult.length() > plaintext.length() / 2) {
         cleanedResult.pop_back();
     }
-
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = duration_cast<microseconds>(end - start).count();
-    }
-
     return cleanedResult;
 }
 

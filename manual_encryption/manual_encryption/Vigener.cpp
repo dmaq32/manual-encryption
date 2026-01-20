@@ -16,8 +16,7 @@ string Vigener::lower(const string& str) {
     return result;
 }
 
-string Vigener::vigenere(string text, string key, double* t, bool decryption) {
-    auto start = steady_clock::now();
+string Vigener::vigenere(string text, string key, bool decryption) {
     // Так как шифр Виженера НЕ МОЖЕТ криптовать/декриптовать через ключ с цифрами, проверяем их на вхождение в него:
     string alphabetstr = "abcdefghijklmnopqrstuvwxyz";
     bool kick_error = false;
@@ -123,10 +122,6 @@ string Vigener::vigenere(string text, string key, double* t, bool decryption) {
             }
             result += " ";
         }
-    }
-    if (t != nullptr) {
-        auto end = steady_clock::now();
-        *t = chrono::duration_cast<chrono::microseconds>(end - start).count();
     }
     return result;
 }

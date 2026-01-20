@@ -10,7 +10,7 @@ using namespace std;
 // Грибков К. О.
 class Atbash {
 public:
-    std::string EncryptDecrypt(const std::string& text, double* t = nullptr);
+    std::string EncryptDecrypt(const std::string& text);
 };
 
 
@@ -20,7 +20,7 @@ public:
 class Vigener {
 public:
     string lower(const string& str);
-    string vigenere(string text, string key, double* t = nullptr, bool decryption = false);
+    string vigenere(string text, string key, bool decryption = false);
 
 };
 
@@ -42,8 +42,8 @@ public:
         createMatrix();
     }
     
-    string encrypt(const string& plaintext, double* t = nullptr);
-    string decrypt(const string& ciphertext, double* t = nullptr);
+    string encrypt(const string& plaintext);
+    string decrypt(const string& ciphertext);
 
     static string toHexString(const string& data);
 };
@@ -53,8 +53,8 @@ public:
 class Tritemia {
 public:
     string get_alphabet();
-    string encrypt(const std::string& text, double* t = nullptr);
-    string decrypt(const std::string& text, double* t = nullptr);
+    string encrypt(const std::string& text);
+    string decrypt(const std::string& text);
 };
 
 // Конкин Д.О.
@@ -77,8 +77,8 @@ public:
     pair<int, int> findCoordinates(char letter);
     char findLetter(int row, int col);
     void demonstrateProcess(string text);
-    string encrypt(string text, double* t = nullptr);
-    string decrypt(string text, double* t = nullptr);
+    string encrypt(string text);
+    string decrypt(string text);
 };
 
 // Астапова К.А.
@@ -86,8 +86,8 @@ class Scytale {
     int d;
 public:
     Scytale(int diam) : d(diam) {}
-    string encrypt(string t, double* t2 = nullptr);
-    string decrypt(string ct, double* t = nullptr);
+    string encrypt(string t);
+    string decrypt(string ct);
 };
 
 // Жаданос М.Ю.
@@ -95,8 +95,8 @@ class Affine {
 public:
     int modInv(int a, int m);
     bool checkA(int a);
-    string encrypt(string text, int a, int b, double* t);
-    string decrypt(string text, int a, int b, double* t);
+    string encrypt(string text, int a, int b);
+    string decrypt(string text, int a, int b);
     string buildAlphabet();
     unordered_map<unsigned char, int> buildPosMap();
 
@@ -171,7 +171,7 @@ public:
     unordered_map<int, string> code_to_syllable;
 
     void build_mappings();
-    string encrypt_text(const string& plain, double* t = nullptr);
-    string decrypt_codes(const string& codes, double* t = nullptr);
+    string encrypt_text(const string& plain);
+    string decrypt_codes(const string& codes);
 
 };
